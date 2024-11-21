@@ -1,0 +1,126 @@
+/* Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+/* Container Styling */
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* Title Styling */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffeb3b;
+    text-shadow: 2px 2px 5px #000;
+}
+
+/* Form Styling */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input, select {
+    background: #fff;
+    color: #333;
+}
+
+button {
+    background-color: #ff9800;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff5722;
+}
+
+/* Summary Styling */
+.summary {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    text-align: left;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Entries List Styling */
+#entriesList {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#entriesList li {
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    color: #ffeb3b;
+}
+
+#entriesList li span.delete {
+    background: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#entriesList li span.delete:hover {
+    background: #e60000;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    input, select, button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .summary {
+        font-size: 1rem;
+    }
+}
