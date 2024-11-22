@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="logout" class="logout-button">Logout</button>
+    <div class="container">
+        <h1>💰 Budget Planner</h1>
+        <div class="form">
+            <input type="number" id="amount" placeholder="Enter amount" required />
+            <select id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            <select id="description">
+                <option value="">Optional Description</option>
+            </select>
+            <input type="text" id="note" placeholder="Add a note (optional)" />
+            <button id="addEntry">Add Entry</button>
+        </div>
+        <div class="summary">
+            <p><strong>Total Income:</strong> <span id="totalIncome">$0.00</span></p>
+            <p><strong>Total Expenses:</strong> <span id="totalExpenses">$0.00</span></p>
+            <p><strong>Balance:</strong> <span id="balance">$0.00</span></p>
+        </div>
+        <ul id="entriesList">
+            <!-- Entries will appear here -->
+        </ul>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('loggedIn')) {
+            window.location.href = "index.html"; // Redirect to login page if not logged in
+        }
+
+        // Logout button functionality
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('loggedIn'); // Clear login status
+            window.location.href = "index.html"; // Redirect to login page
+        });
+    </script>
+</body>
+</html>

@@ -3,33 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Budget Tracker</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>💰 Budget Tracker 💼</h1>
-        <div class="form">
-            <input type="number" id="amount" placeholder="Enter amount" required />
-            <select id="type">
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
-            </select>
-            <select id="description">
-                <!-- Options will be dynamically populated -->
-            </select>
-            <input type="text" id="note" placeholder="Add a note " />
-            <button id="addEntry">Add Entry</button>
-        </div>
-        <div class="summary">
-            <p><strong>Total Income:</strong> <span id="totalIncome">$0.00</span></p>
-            <p><strong>Total Expenses:</strong> <span id="totalExpenses">$0.00</span></p>
-            <p><strong>Balance:</strong> <span id="balance">$0.00</span></p>
-        </div>
-        <ul id="entriesList">
-            <!-- Entries will appear here -->
-        </ul>
+    <div class="login-container">
+        <h1>🔑 Login</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
+        <p id="error" style="color: red; display: none;">Invalid username or password</p>
     </div>
-    <script src="script.js"></script>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const error = document.getElementById('error');
+
+        // Hardcoded user credentials
+        const validUser = { username: "user", password: "password123" };
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Validate credentials
+            if (username === validUser.username && password === validUser.password) {
+                localStorage.setItem('loggedIn', 'true'); // Set login status
+                window.location.href = "budget.html"; // Redirect to Budget Planner
+            } else {
+                error.style.display = 'block'; // Show error message
+            }
+        });
+    </script>
 </body>
 </html>

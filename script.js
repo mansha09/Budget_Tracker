@@ -1,8 +1,8 @@
-// Selecting DOM elements
+
 const amountInput = document.getElementById('amount');
 const typeSelect = document.getElementById('type');
 const descriptionInput = document.getElementById('description');
-const noteInput = document.getElementById('note'); // Note input field
+const noteInput = document.getElementById('note');
 const addEntryButton = document.getElementById('addEntry');
 const totalIncomeDisplay = document.getElementById('totalIncome');
 const totalExpensesDisplay = document.getElementById('totalExpenses');
@@ -13,16 +13,16 @@ const entriesList = document.getElementById('entriesList');
 let totalIncome = 0;
 let totalExpenses = 0;
 
-// Preset options
+//options for descriptions
 const presets = {
     income: ['Salary', 'Bonus', 'Gift', 'Investment'],
     expense: ['Rent', 'Groceries', 'Utilities', 'Entertainment']
 };
 
-// Populate description options dynamically
+// dropdown
 typeSelect.addEventListener('change', () => {
     const selectedType = typeSelect.value;
-    descriptionInput.innerHTML = ''; // Clear existing options
+    descriptionInput.innerHTML = '';
 
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
@@ -37,10 +37,10 @@ typeSelect.addEventListener('change', () => {
     });
 });
 
-// Initialize with income options on page load
+
 typeSelect.dispatchEvent(new Event('change'));
 
-// Function to format numbers as currency
+//  currency
 function formatCurrency(amount) {
     return `$${amount.toFixed(2)}`;
 }
@@ -50,7 +50,7 @@ addEntryButton.addEventListener('click', () => {
     const amount = parseFloat(amountInput.value);
     const type = typeSelect.value;
     const description = descriptionInput.value;
-    const note = noteInput.value; // Get the note value
+    const note = noteInput.value;
 
     // Validation
     if (isNaN(amount) || amount <= 0) {
@@ -58,11 +58,12 @@ addEntryButton.addEventListener('click', () => {
         return;
     }
 
-    // Add entry to the list
+    // Create new list item
     const listItem = document.createElement('li');
     listItem.innerHTML = `
-        <span>${type === 'income' ? '+' : '-'} ${formatCurrency(amount)}${description ? `: ${description}` : ''}${note ? ` - ${note}` : ''}</span>
-        <span class="delete" style="cursor: pointer;">❌</span>
+        <span>${type === 'income' ? '+' : '-'} ${formatCurrency(amount)}${description ? ` (${description})` : ''}${note ? ` - ${note}` : ''}</span>
+        <button class="markComplete">Mark as Completed</button>
+        <button class="delete">Delete</button>
     `;
     entriesList.appendChild(listItem);
 
@@ -72,24 +73,32 @@ addEntryButton.addEventListener('click', () => {
     } else {
         totalExpenses += amount;
     }
-
     updateSummary();
 
-    // Clear input fields
+    // Clear inputs
     amountInput.value = '';
     descriptionInput.value = '';
-    noteInput.value = ''; // Clear note field
+    noteInput.value = '';
     typeSelect.dispatchEvent(new Event('change'));
 
-    // Add delete functionality
+    // Mark as completed functionality
+    listItem.querySelector('.markComplete').addEventListener('click', () => {
+        listItem.classList.toggle('completed');
+    });
+
+    // Delete functionality
     listItem.querySelector('.delete').addEventListener('click', () => {
         listItem.remove();
-        if (type === 'income') {
-            totalIncome -= amount;
+        if (listItem.classList.contains('completed')) {
+            if (type === 'income') {
+                totalIncome -= amount;
+            } else {
+                totalExpenses -= amount;
+            }
+            updateSummary();
         } else {
-            totalExpenses -= amount;
+            alert("Please mark the entry as completed before deleting!");
         }
-        updateSummary();
     });
 });
 
